@@ -24,6 +24,12 @@ public class Controleur
 	}
 
 
+	public ArrayList<String> comparerPrenom( String prenom )
+	{
+		return this.prenomAtomique.estCompare( prenom );
+	}
+
+
 	public ArrayList<String> getValide()
 	{
 		return this.prenomAtomique.getValide();

@@ -90,6 +90,49 @@ public class PrenomAtomique
 	}
 
 
+	public ArrayList<String> estCompare( String prenom )
+	{
+		String prenomConcatener = "";
+		
+		for ( int i = 0; i < tabSymboleValide.size(); i ++ )
+		{
+			prenomConcatener = prenomConcatener + tabSymboleValide[i];
+		}
+		
+		if ( prenomConcatener.equals( prenom ) ) return tabSymboleValide;
+		else
+		{
+			prenomConcatener = "";
+			
+			for ( int i = 0; i < prenom.length(); i ++ )
+			{
+				String test = "" + prenom.charAt(i) + prenom.charAt(i+1);
+				
+				if ( test.equals( tabSymboleValide[i] ) || test.equals( tabSymboleValide[i + 1] ) )
+				{
+					if ( test.equals( tabSymboleValide[i] ) )
+						prenomConcatener = prenomConcatener + tabSymboleValide[i];
+					
+					if ( test.equals( tabSymboleValide[i + 1] ) )
+						prenomConcatener = prenomConcatener + tabSymboleValide[i + 1];
+				}
+				
+				
+				test = prenom.charAt(i);
+				
+				if ( test.equals( tabSymboleValide[i] ) || test.equals( tabSymboleValide[i + 1] ) )
+				{
+					if ( test.equals( tabSymboleValide[i] ) )
+						prenomConcatener = prenomConcatener + tabSymboleValide[i];
+					
+					if ( test.equals( tabSymboleValide[i + 1] ) )
+						prenomConcatener = prenomConcatener + tabSymboleValide[i + 1];
+				}
+			}
+		}
+	}
+
+
 	public ArrayList<String> getValide()
 	{
 		return this.tabSymboleValide;

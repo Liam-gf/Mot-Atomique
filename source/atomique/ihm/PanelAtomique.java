@@ -64,9 +64,7 @@ public class PanelAtomique extends JPanel implements ActionListener
 			if ( this.ctrl.verifierPrenom( this.getPrenom().toLowerCase() ) )
 			{
 				this.lblPrenom.setText( "Le prénom " + this.getPrenom() + " est atomique !" );
-				ArrayList<String> tabVerif = this.ctrl.getValide();
-
-				
+				this.ctrl.comparerPrenom( this.getPrenom() );
 			}
 			else
 			{
