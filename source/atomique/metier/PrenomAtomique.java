@@ -96,7 +96,7 @@ public class PrenomAtomique
 		
 		for ( int i = 0; i < tabSymboleValide.size(); i ++ )
 		{
-			prenomConcatener = prenomConcatener + tabSymboleValide[i];
+			prenomConcatener = prenomConcatener + tabSymboleValide.get(i);
 		}
 		
 		if ( prenomConcatener.equals( prenom ) ) return tabSymboleValide;
@@ -108,28 +108,31 @@ public class PrenomAtomique
 			{
 				String test = "" + prenom.charAt(i) + prenom.charAt(i+1);
 				
-				if ( test.equals( tabSymboleValide[i] ) || test.equals( tabSymboleValide[i + 1] ) )
+				if ( test.equals( tabSymboleValide.get(i) ) || test.equals( tabSymboleValide.get(i + 1) ) )
 				{
-					if ( test.equals( tabSymboleValide[i] ) )
-						prenomConcatener = prenomConcatener + tabSymboleValide[i];
+					if ( test.equals( tabSymboleValide.get(i) ) )
+						prenomConcatener = prenomConcatener + tabSymboleValide.get(i);
 					
-					if ( test.equals( tabSymboleValide[i + 1] ) )
-						prenomConcatener = prenomConcatener + tabSymboleValide[i + 1];
+					if ( test.equals( tabSymboleValide.get(i + 1) ) )
+						prenomConcatener = prenomConcatener + tabSymboleValide.get(i + 1);
 				}
-				
-				
-				test = prenom.charAt(i);
-				
-				if ( test.equals( tabSymboleValide[i] ) || test.equals( tabSymboleValide[i + 1] ) )
+				else
 				{
-					if ( test.equals( tabSymboleValide[i] ) )
-						prenomConcatener = prenomConcatener + tabSymboleValide[i];
-					
-					if ( test.equals( tabSymboleValide[i + 1] ) )
-						prenomConcatener = prenomConcatener + tabSymboleValide[i + 1];
+					test = "" + prenom.charAt(i);
+
+					if (test.equals(tabSymboleValide.get(i)) || test.equals(tabSymboleValide.get(i + 1)))
+					{
+						if (test.equals(tabSymboleValide.get(i)))
+							prenomConcatener = prenomConcatener + tabSymboleValide.get(i);
+
+						if (test.equals(tabSymboleValide.get(i + 1)))
+							prenomConcatener = prenomConcatener + tabSymboleValide.get(i + 1);
+					}
 				}
 			}
 		}
+
+		return tabSymboleValide;
 	}
 
 
