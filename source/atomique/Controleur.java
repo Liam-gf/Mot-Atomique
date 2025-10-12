@@ -23,23 +23,25 @@ public class Controleur
 		return this.prenomAtomique.estAtomique( prenom );
 	}
 
-
+/*
 	public ArrayList<String> comparerPrenom( String prenom )
 	{
 		return this.prenomAtomique.estCompare( prenom );
-	}
+	}*/
 
 
-	public ArrayList<String> getValide()
+	public ArrayList<String> getTabValide()
 	{
-		return this.prenomAtomique.getValide();
+		return this.prenomAtomique.getTabValide();
 	}
 
 
-	public String getImage()
+	public String getImage( String s )
 	{
-		return "atomique/images/Hyrogene.png";
+		//return "atomique/images/" + s + ".png";
+		return "atomique/images2/ac.png";
 	}
+
 
 	public static void main(String[] args)
 	{

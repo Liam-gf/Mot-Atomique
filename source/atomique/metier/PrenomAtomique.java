@@ -7,8 +7,8 @@ public class PrenomAtomique
 {
 	private static final List<String> LISTE_SYMBOLE = List.of
 	(
-	        "h" , "he", "li", "be",  "b", "c" , "n" , "o" , "f" , "ne",
-	        "na", "mg", "al", "si",  "p", "s" , "cl", "ar", "k" , "ca",
+	        "h" , "he", "li", "be", "b" , "c" , "n" , "o" , "f" , "ne",
+	        "na", "mg", "al", "si", "p" , "s" , "cl", "ar", "k" , "ca",
 	        "sc", "ti", "v" , "cr", "mn", "fe", "co", "ni", "cu", "zn",
 	        "ga", "ge", "as", "se", "br", "kr", "rb", "sr", "y" , "zr",
 	        "nb", "mo", "tc", "ru", "rh", "pd", "ag", "cd", "in", "sn",
@@ -34,7 +34,7 @@ public class PrenomAtomique
 		String  lettres    =   "";
 		boolean existe     = true;
 
-		if ( this.tabSymboleValide.isEmpty() )
+		if ( ! this.tabSymboleValide.isEmpty() )
 			this.tabSymboleValide.clear();
 
 		ArrayList<String> tabSymboleCopie  = new ArrayList<>( LISTE_SYMBOLE );
@@ -65,12 +65,13 @@ public class PrenomAtomique
 				{
 					existe     = true;
 					this.tabSymboleValide.add(tabSymboleCopie.get(j));
+					i += 1;
 				}
 			}
 			
 			if ( existe == true )
 			{
-				i += 2;
+				i += 1;
 			}
 		}
 		
@@ -90,7 +91,7 @@ public class PrenomAtomique
 	}
 
 
-	public ArrayList<String> estCompare( String prenom )
+/*	public ArrayList<String> estCompare( String prenom )
 	{
 		String prenomConcatener = "";
 		
@@ -133,10 +134,10 @@ public class PrenomAtomique
 		}
 
 		return tabSymboleValide;
-	}
+	}*/
 
 
-	public ArrayList<String> getValide()
+	public ArrayList<String> getTabValide()
 	{
 		return this.tabSymboleValide;
 	}

@@ -6,6 +6,10 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.awt.GridLayout;
 
+import java.awt.Image;
+import java.awt.Color;
+import java.awt.FlowLayout;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,7 +21,9 @@ public class PanelAtomique extends JPanel implements ActionListener
 
 	private JTextField    txtPrenom;
 	private JLabel        lblPrenom;
-	private JLabel        lblImage;
+	//private JLabel        lblImage;
+	
+	private JPanel panelSchema;
 	
 	public PanelAtomique( Controleur ctrl )
 	{
@@ -31,11 +37,11 @@ public class PanelAtomique extends JPanel implements ActionListener
 		
 		JPanel panelPrenom = new JPanel();
 		JPanel panelPhrase = new JPanel();
-		JPanel panelSchema = new JPanel();
+		this.panelSchema   = new JPanel();
 
 		this.txtPrenom     = new JTextField( 30 );
 		this.lblPrenom     = new JLabel    ( "" );
-		this.lblImage      = new JLabel    (    );
+		//this.lblImage      = new JLabel    (    );
 		
 		/* ----------------------------- */
 		/* Positionnement des composants */
@@ -43,7 +49,7 @@ public class PanelAtomique extends JPanel implements ActionListener
 		
 		panelPrenom.add(txtPrenom);
 		panelPhrase.add(lblPrenom);
-		panelSchema.add(lblImage);
+		//panelSchema.add(lblImage);
 
 		this.add( panelPrenom );
 		this.add( panelPhrase );
@@ -64,7 +70,36 @@ public class PanelAtomique extends JPanel implements ActionListener
 			if ( this.ctrl.verifierPrenom( this.getPrenom().toLowerCase() ) )
 			{
 				this.lblPrenom.setText( "Le prénom " + this.getPrenom() + " est atomique !" );
-				this.ctrl.comparerPrenom( this.getPrenom() );
+				// this.ctrl.comparerPrenom( this.getPrenom() );
+				ArrayList<String> tabValide = this.ctrl.getTabValide();
+				
+				
+				/*ImageIcon icon = new ImageIcon(this.ctrl.getImage( ));
+				Image img = icon.getImage();
+				Image resizedImg = img.getScaledInstance(600, 423, Image.SCALE_SMOOTH);
+				ImageIcon resizedIcon = new ImageIcon(resizedImg);
+				lblImage.setIcon(resizedIcon);*/
+
+				this.panelSchema.removeAll();
+				
+				this.panelSchema.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+				
+				
+				for ( String s : tabValide )
+				{
+					JLabel lbl = new JLabel( new ImageIcon(new ImageIcon(this.ctrl.getImage(s)).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
+					//JLabel lbl = new JLabel( new ImageIcon(new ImageIcon(this.ctrl.getImage(s)).getImage().getScaledInstance(600, 423, Image.SCALE_SMOOTH)));
+					
+					lbl.setBorder(null);
+					lbl.setOpaque(false);
+					lbl.setBackground(Color.BLACK);
+					lbl.setText(null);
+					lbl.setHorizontalAlignment(JLabel.LEFT);
+					lbl.setVerticalAlignment(JLabel.TOP);
+					
+					this.panelSchema.add(lbl);
+				}
+
 			}
 			else
 			{
