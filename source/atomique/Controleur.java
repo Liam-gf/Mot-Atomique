@@ -20,9 +20,22 @@ public class Controleur
 
 	public boolean verifierPrenom( String prenom )
 	{
-		return this.prenomAtomique.estAtomique( prenom );
+		return this.prenomAtomique.estAtomique2( prenom );
 	}
 
+
+	public void supprimerOccurence()
+	{
+		this.prenomAtomique.supprimerOccurence();
+	}
+
+
+	public boolean validerPrenom( String prenom )
+	{
+		return this.prenomAtomique.validerPrenom( prenom );
+	}
+	
+	
 /*
 	public ArrayList<String> comparerPrenom( String prenom )
 	{
@@ -38,8 +51,7 @@ public class Controleur
 
 	public String getImage( String s )
 	{
-		//return "atomique/images/" + s + ".png";
-		return "atomique/images2/ac.png";
+		return "atomique/images/" + s + ".png";
 	}
 
 

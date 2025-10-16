@@ -1,5 +1,6 @@
 package atomique.metier;
 
+import java.util.LinkedHashSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class PrenomAtomique
 	        "md", "no", "lr", "rf", "db", "sg", "bh", "hs", "mt", "ds",
 	        "rg", "cn", "nh", "fl", "mc", "lv", "ts", "og"
 	);
-
+	
 	private ArrayList<String> tabSymboleValide;
 	
 	public PrenomAtomique()
@@ -29,112 +30,94 @@ public class PrenomAtomique
 	}
 
 
-	public boolean estAtomique( String prenom )
+	public boolean estAtomique2( String prenom )
 	{
 		String  lettres    =   "";
-		boolean existe     = true;
-
+		
 		if ( ! this.tabSymboleValide.isEmpty() )
 			this.tabSymboleValide.clear();
-
+		
 		ArrayList<String> tabSymboleCopie  = new ArrayList<>( LISTE_SYMBOLE );
 		
-		int i = 0;
-		
-		while ( existe == true && i < prenom.length() - 1 )
+		for ( int i = 0; i + 1 < prenom.length(); i ++ )
 		{
-			existe = false;
-			
 			lettres = String.valueOf( prenom.charAt(i) );
 			
 			for ( int j = 0; j < tabSymboleCopie.size(); j ++ )
 			{
 				if ( lettres.equals( tabSymboleCopie.get(j) ) )
 				{
-					existe = true;
 					this.tabSymboleValide.add(tabSymboleCopie.get(j));
 				}
 			}
-			
 			
 			lettres = lettres + String.valueOf( prenom.charAt( i + 1 ) );
 			
-			for ( int j = 0; j < tabSymboleCopie.size(); j++ )
+			for ( int j = 0; j < tabSymboleCopie.size(); j ++ )
 			{
 				if ( lettres.equals( tabSymboleCopie.get(j) ) )
 				{
-					existe     = true;
 					this.tabSymboleValide.add(tabSymboleCopie.get(j));
-					i += 1;
 				}
 			}
-			
-			if ( existe == true )
-			{
-				i += 1;
-			}
 		}
 		
-
-		if ( i == prenom.length() )
+		for ( String symbole : this.tabSymboleValide )
 		{
-			for ( String symbole : this.tabSymboleValide )
-			{
-				System.out.print( symbole + " " );
-			}
-			System.out.println();
-
-			return true;
+			System.out.print( symbole + " " );
 		}
+		System.out.println();
 		
-		return false;
+		return true;
 	}
 
 
-/*	public ArrayList<String> estCompare( String prenom )
+	public void supprimerOccurence()
 	{
-		String prenomConcatener = "";
-		
-		for ( int i = 0; i < tabSymboleValide.size(); i ++ )
+		this.tabSymboleValide = new ArrayList<>( new LinkedHashSet<>( tabSymboleValide ) );
+	}
+
+
+	public boolean validerPrenom( String mot )
+	{
+		ArrayList<String> resultat = new ArrayList<>();
+		String construit = "";
+
+		for (String s : this.tabSymboleValide)
 		{
-			prenomConcatener = prenomConcatener + tabSymboleValide.get(i);
-		}
-		
-		if ( prenomConcatener.equals( prenom ) ) return tabSymboleValide;
-		else
-		{
-			prenomConcatener = "";
-			
-			for ( int i = 0; i < prenom.length(); i ++ )
+			String temp = construit + s;
+
+
+			if (mot.startsWith(temp))
 			{
-				String test = "" + prenom.charAt(i) + prenom.charAt(i+1);
-				
-				if ( test.equals( tabSymboleValide.get(i) ) || test.equals( tabSymboleValide.get(i + 1) ) )
+				resultat.add(s);
+				construit = temp;
+			}
+			else
+			{
+				if (mot.startsWith(s) && s.length() > 0)
 				{
-					if ( test.equals( tabSymboleValide.get(i) ) )
-						prenomConcatener = prenomConcatener + tabSymboleValide.get(i);
-					
-					if ( test.equals( tabSymboleValide.get(i + 1) ) )
-						prenomConcatener = prenomConcatener + tabSymboleValide.get(i + 1);
-				}
-				else
-				{
-					test = "" + prenom.charAt(i);
-
-					if (test.equals(tabSymboleValide.get(i)) || test.equals(tabSymboleValide.get(i + 1)))
-					{
-						if (test.equals(tabSymboleValide.get(i)))
-							prenomConcatener = prenomConcatener + tabSymboleValide.get(i);
-
-						if (test.equals(tabSymboleValide.get(i + 1)))
-							prenomConcatener = prenomConcatener + tabSymboleValide.get(i + 1);
-					}
+				    resultat.clear();
+				    resultat.add(s);
+				    construit = s;
 				}
 			}
+
+
+			if ( construit.equals(mot) )
+				break;
 		}
 
-		return tabSymboleValide;
-	}*/
+		this.tabSymboleValide = resultat;
+		
+		for ( String symbole : this.tabSymboleValide )
+		{
+			System.out.print( symbole + " " );
+		}
+		System.out.println("------");
+		
+		return true;
+	}
 
 
 	public ArrayList<String> getTabValide()

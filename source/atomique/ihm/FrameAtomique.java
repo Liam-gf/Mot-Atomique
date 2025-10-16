@@ -12,11 +12,11 @@ public class FrameAtomique extends JFrame
 	public FrameAtomique( Controleur ctrl )
 	{
 		this.ctrl = ctrl;
-
-		this.setTitle (   " Prénom Atomique "  );
-		this.setSize  (        400, 300        );
 		
-
+		this.setTitle   (   " Prénom Atomique "   );
+		this.setSize    (        1000, 600        );
+		this.setLocation(         400, 200        );
+		
 		/* ------------------------------ */
 		/* Création des composants        */
 		/* ------------------------------ */
@@ -33,8 +33,6 @@ public class FrameAtomique extends JFrame
 		/* Activation des composants      */
 		/* ------------------------------ */
 		
-		
-
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		this.setVisible( true );
 	}
