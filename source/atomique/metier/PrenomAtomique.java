@@ -81,42 +81,34 @@ public class PrenomAtomique
 	public boolean validerPrenom( String mot )
 	{
 		ArrayList<String> resultat = new ArrayList<>();
-		String construit = "";
-
-		for (String s : this.tabSymboleValide)
+		
+		if ( this.Recursive( "", mot, this.tabSymboleValide, resultat ) )
 		{
-			String temp = construit + s;
+			this.tabSymboleValide = resultat;
+			return true;
+		}
+		return false;
+	}
 
+	private boolean Recursive(String construit, String mot, ArrayList<String> symboles, ArrayList<String> resultat)
+	{
+		if ( construit.equals(mot) ) return true;
 
-			if (mot.startsWith(temp))
+		// Si la chaîne construite ne correspond plus au début du mot, on arrête ici
+		if (!mot.startsWith(construit)) return false;
+
+		// On teste chaque symbole possible
+		for (String s : symboles)
+		{
+			resultat.add(s);
+			if (Recursive(construit + s, mot, symboles, resultat))
 			{
-				resultat.add(s);
-				construit = temp;
+				return true; // combinaison trouvée
 			}
-			else
-			{
-				if (mot.startsWith(s) && s.length() > 0)
-				{
-				    resultat.clear();
-				    resultat.add(s);
-				    construit = s;
-				}
-			}
-
-
-			if ( construit.equals(mot) )
-				break;
+			resultat.remove(resultat.size() - 1); // backtrack
 		}
 
-		this.tabSymboleValide = resultat;
-		
-		for ( String symbole : this.tabSymboleValide )
-		{
-			System.out.print( symbole + " " );
-		}
-		System.out.println("------");
-		
-		return true;
+		return false;
 	}
 
 

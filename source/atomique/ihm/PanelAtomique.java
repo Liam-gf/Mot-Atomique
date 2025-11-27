@@ -64,48 +64,40 @@ public class PanelAtomique extends JPanel implements ActionListener
 	{
 		if ( e.getSource() == this.txtPrenom )
 		{
-			/*
-			if ( this.ctrl.verifierPrenom( this.getPrenom().toLowerCase() ) )
+			this.ctrl.verifierPrenom( this.getPrenom().toLowerCase() );
+			this.ctrl.supprimerOccurence();
+			this.ctrl.validerPrenom ( this.getPrenom() );
+			
+			this.panelSchema.removeAll();
+			
+			if ( this.ctrl.validerPrenom( this.getPrenom() ) )
 			{
-				this.lblPrenom.setText( "Le prénom " + this.getPrenom() + " est atomique !" );
-				// this.ctrl.comparerPrenom( this.getPrenom() );
+				this.panelSchema.setLayout( new FlowLayout(FlowLayout.CENTER, 0, 0) );
+				
 				ArrayList<String> tabValide = this.ctrl.getTabValide();
-				
-				this.panelSchema.removeAll();
-				
-				this.panelSchema.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-				
 				
 				for ( String s : tabValide )
 				{
 					JLabel lbl = new JLabel( new ImageIcon(new ImageIcon(this.ctrl.getImage(s)).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
-					
+				
 					this.panelSchema.add(lbl);
 				}
+				
+				this.lblPrenom.setText( "Le prénom " + this.getPrenom() + " est atomique !" );
 			}
 			else
 			{
 				this.lblPrenom.setText( "Le prénom " + this.getPrenom() + " n'est pas atomique !" );
 			}
-			*/
 			
-			this.ctrl.verifierPrenom( this.getPrenom() );
-			this.ctrl.supprimerOccurence();
-			this.ctrl.validerPrenom( this.getPrenom() );
-			
-			
-			ArrayList<String> tabValide = this.ctrl.getTabValide();
-			
-			this.panelSchema.removeAll();
-			
-			this.panelSchema.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-			
-			for ( String s : tabValide )
-			{
-				JLabel lbl = new JLabel( new ImageIcon(new ImageIcon(this.ctrl.getImage(s)).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
+				ArrayList<String> tabValide = this.ctrl.getTabValide();
 				
-				this.panelSchema.add(lbl);
-			}
+				for ( String s : tabValide )
+				{
+					JLabel lbl = new JLabel( new ImageIcon(new ImageIcon(this.ctrl.getImage(s)).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
+				
+					this.panelSchema.add(lbl);
+				}
 		}
 	}
 
