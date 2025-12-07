@@ -2,27 +2,23 @@ package atomique.ihm;
 
 import atomique.Controleur;
 
-import java.awt.event.*;
 import java.util.ArrayList;
-import java.awt.GridLayout;
 
 import java.awt.Image;
-import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.awt.event.*;
+
+import javax.swing.*;
 
 public class PanelAtomique extends JPanel implements ActionListener
 {
-	private Controleur   ctrl;
+	private Controleur ctrl;
 	
-	private JTextField    txtPrenom;
-	private JLabel        lblPrenom;
-	
-	private JPanel panelSchema;
+	private JTextField txtPrenom;
+	private JLabel     lblPrenom;
+	private JPanel     panelSchema;
 	
 	public PanelAtomique( Controleur ctrl )
 	{
@@ -45,8 +41,8 @@ public class PanelAtomique extends JPanel implements ActionListener
 		/* Positionnement des composants */
 		/* ----------------------------- */
 		
-		panelPrenom.add(txtPrenom);
-		panelPhrase.add(lblPrenom);
+		panelPrenom.add( txtPrenom );
+		panelPhrase.add( lblPrenom );
 		
 		this.add(      panelPrenom );
 		this.add(      panelPhrase );
@@ -64,40 +60,26 @@ public class PanelAtomique extends JPanel implements ActionListener
 	{
 		if ( e.getSource() == this.txtPrenom )
 		{
-			this.ctrl.verifierPrenom( this.getPrenom().toLowerCase() );
-			this.ctrl.supprimerOccurence();
-			this.ctrl.validerPrenom ( this.getPrenom() );
+			String mot = this.getPrenom();
+			
+			this.recupererLettres( mot );
+			this.supprimerOccurence();
 			
 			this.panelSchema.removeAll();
 			
-			if ( this.ctrl.validerPrenom( this.getPrenom() ) )
+			if ( this.validerPrenom( mot ) )
 			{
-				this.panelSchema.setLayout( new FlowLayout(FlowLayout.CENTER, 0, 0) );
+				this.afficherMot();
 				
-				ArrayList<String> tabValide = this.ctrl.getTabValide();
-				
-				for ( String s : tabValide )
-				{
-					JLabel lbl = new JLabel( new ImageIcon(new ImageIcon(this.ctrl.getImage(s)).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
-				
-					this.panelSchema.add(lbl);
-				}
-				
-				this.lblPrenom.setText( "Le prénom " + this.getPrenom() + " est atomique !" );
+				this.lblPrenom.setText( "Le prénom " + mot + " est atomique !" );
 			}
 			else
 			{
-				this.lblPrenom.setText( "Le prénom " + this.getPrenom() + " n'est pas atomique !" );
+				this.lblPrenom.setText( "Le prénom " + mot + " n'est pas atomique !");
 			}
 			
-				ArrayList<String> tabValide = this.ctrl.getTabValide();
-				
-				for ( String s : tabValide )
-				{
-					JLabel lbl = new JLabel( new ImageIcon(new ImageIcon(this.ctrl.getImage(s)).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
-				
-					this.panelSchema.add(lbl);
-				}
+			this.panelSchema.revalidate();
+			this.panelSchema.repaint();
 		}
 	}
 
@@ -105,5 +87,35 @@ public class PanelAtomique extends JPanel implements ActionListener
 	public String getPrenom()
 	{
 		return this.txtPrenom.getText().toLowerCase();
+	}
+
+	public ArrayList<String> getTabValide()
+	{
+		return this.ctrl.getTabValide();
+	}
+
+
+	public void afficherMot()
+	{
+		this.panelSchema.setLayout( new FlowLayout( FlowLayout.CENTER, 0, 0 ) );
+		
+		ArrayList<String> tabValide = this.getTabValide();
+		
+		for ( String s : tabValide )
+		{
+			JLabel lbl = new JLabel( new ImageIcon(new ImageIcon(this.ctrl.getImage(s)).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
+		
+			this.panelSchema.add(lbl);
+		}
+	}
+
+
+	public boolean recupererLettres ( String mot ) { return this.ctrl.recupererLettres( mot ); }
+	public boolean validerPrenom  ( String mot ) { return this.ctrl.validerPrenom ( mot ); }
+
+
+	public void supprimerOccurence()
+	{
+		this.ctrl.supprimerOccurence();
 	}
 }

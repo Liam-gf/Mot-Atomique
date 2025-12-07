@@ -18,30 +18,13 @@ public class Controleur
 	}
 
 
-	public boolean verifierPrenom( String prenom )
-	{
-		return this.prenomAtomique.estAtomique2( prenom );
-	}
-
+	public boolean recupererLettres( String prenom ) { return this.prenomAtomique.recupererLettres( prenom ); }
+	public boolean validerPrenom   ( String prenom ) { return this.prenomAtomique.validerPrenom   ( prenom ); }
 
 	public void supprimerOccurence()
 	{
 		this.prenomAtomique.supprimerOccurence();
 	}
-
-
-	public boolean validerPrenom( String prenom )
-	{
-		return this.prenomAtomique.validerPrenom( prenom );
-	}
-	
-	
-/*
-	public ArrayList<String> comparerPrenom( String prenom )
-	{
-		return this.prenomAtomique.estCompare( prenom );
-	}*/
-
 
 	public ArrayList<String> getTabValide()
 	{
