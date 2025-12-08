@@ -13,9 +13,9 @@ public class FrameAtomique extends JFrame
 	{
 		this.ctrl = ctrl;
 		
-		this.setTitle   (   " Prénom Atomique "   );
-		this.setSize    (        1000, 600        );
-		this.setLocation(         400, 200        );
+		this.setTitle   (   " Mot Atomique "   );
+		this.setSize    (      1000, 600       );
+		this.setLocation(       400, 200       );
 		
 		/* ------------------------------ */
 		/* Création des composants        */

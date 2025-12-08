@@ -18,7 +18,7 @@ public class Controleur
 	}
 
 
-	public boolean recupererLettres( String prenom ) { return this.prenomAtomique.recupererLettres( prenom ); }
+	public void    recupererLettres( String prenom ) { this.prenomAtomique.recupererLettres( prenom ); }
 	public boolean validerPrenom   ( String prenom ) { return this.prenomAtomique.validerPrenom   ( prenom ); }
 
 	public void supprimerOccurence()
@@ -38,7 +38,7 @@ public class Controleur
 	}
 
 
-	public static void main(String[] args)
+	public static void main( String[] args )
 	{
 		new Controleur();
 	}

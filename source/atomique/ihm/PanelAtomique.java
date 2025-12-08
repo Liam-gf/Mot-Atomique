@@ -110,8 +110,8 @@ public class PanelAtomique extends JPanel implements ActionListener
 	}
 
 
-	public boolean recupererLettres ( String mot ) { return this.ctrl.recupererLettres( mot ); }
-	public boolean validerPrenom  ( String mot ) { return this.ctrl.validerPrenom ( mot ); }
+	public void recupererLettres ( String mot ) { this.ctrl.recupererLettres( mot ); }
+	public boolean validerPrenom    ( String mot ) { return this.ctrl.validerPrenom   ( mot ); }
 
 
 	public void supprimerOccurence()

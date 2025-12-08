@@ -26,9 +26,9 @@ public class PrenomAtomique
 	}
 
 
-	public boolean recupererLettres( String prenom )
+	public void recupererLettres( String prenom )
 	{
-		String  lettres    =   "";
+		String lettres = "";
 		
 		if ( ! this.tabSymboleValide.isEmpty() )
 			this.tabSymboleValide.clear();
@@ -38,33 +38,23 @@ public class PrenomAtomique
 		for ( int i = 0; i + 1 < prenom.length(); i ++ )
 		{
 			lettres = String.valueOf( prenom.charAt(i) );
-			
-			for ( int j = 0; j < tabSymboleCopie.size(); j ++ )
-			{
-				if ( lettres.equals( tabSymboleCopie.get(j) ) )
-				{
-					this.tabSymboleValide.add(tabSymboleCopie.get(j));
-				}
-			}
+			ajouterLettresValides( lettres, tabSymboleCopie );
 			
 			lettres = lettres + String.valueOf( prenom.charAt( i + 1 ) );
-			
-			for ( int j = 0; j < tabSymboleCopie.size(); j ++ )
+			ajouterLettresValides( lettres, tabSymboleCopie );
+		}
+	}
+
+
+	public void ajouterLettresValides( String lettres, ArrayList<String> tabSymboleCopie )
+	{
+		for (int j = 0; j < tabSymboleCopie.size(); j++)
+		{
+			if (lettres.equals(tabSymboleCopie.get(j)))
 			{
-				if ( lettres.equals( tabSymboleCopie.get(j) ) )
-				{
-					this.tabSymboleValide.add(tabSymboleCopie.get(j));
-				}
+				this.tabSymboleValide.add(tabSymboleCopie.get(j));
 			}
 		}
-		
-		for ( String symbole : this.tabSymboleValide )
-		{
-			System.out.print( symbole + " " );
-		}
-		System.out.println();
-		
-		return true;
 	}
 
 
