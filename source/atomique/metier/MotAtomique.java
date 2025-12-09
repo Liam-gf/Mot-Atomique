@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
-public class PrenomAtomique
+public class MotAtomique
 {
 	private static final List<String> LISTE_SYMBOLE = List.of
 	(
@@ -20,13 +20,13 @@ public class PrenomAtomique
 	
 	private ArrayList<String> tabSymboleValide;
 	
-	public PrenomAtomique()
+	public MotAtomique()
 	{
 		this.tabSymboleValide = new ArrayList<String>();
 	}
 
 
-	public void recupererLettres( String prenom )
+	public void recupererLettres( String Mot )
 	{
 		String lettres = "";
 		
@@ -35,12 +35,12 @@ public class PrenomAtomique
 		
 		ArrayList<String> tabSymboleCopie  = new ArrayList<>( LISTE_SYMBOLE );
 		
-		for ( int i = 0; i + 1 < prenom.length(); i ++ )
+		for ( int i = 0; i + 1 < Mot.length(); i ++ )
 		{
-			lettres = String.valueOf( prenom.charAt(i) );
+			lettres = String.valueOf( Mot.charAt(i) );
 			ajouterLettresValides( lettres, tabSymboleCopie );
 			
-			lettres = lettres + String.valueOf( prenom.charAt( i + 1 ) );
+			lettres = lettres + String.valueOf( Mot.charAt( i + 1 ) );
 			ajouterLettresValides( lettres, tabSymboleCopie );
 		}
 	}
@@ -48,27 +48,22 @@ public class PrenomAtomique
 
 	public void ajouterLettresValides( String lettres, ArrayList<String> tabSymboleCopie )
 	{
-		for (int j = 0; j < tabSymboleCopie.size(); j++)
-		{
-			if (lettres.equals(tabSymboleCopie.get(j)))
-			{
-				this.tabSymboleValide.add(tabSymboleCopie.get(j));
-			}
-		}
+		if ( tabSymboleCopie.contains( lettres ) )
+			this.tabSymboleValide.add( lettres );
 	}
 
 
-	public void supprimerOccurence()
+	public void supprimerOccurrence()
 	{
 		this.tabSymboleValide = new ArrayList<>( new LinkedHashSet<>( tabSymboleValide ) );
 	}
 
 
-	public boolean validerPrenom( String mot )
+	public boolean validerMot( String mot )
 	{
 		ArrayList<String> resultat = new ArrayList<>();
 		
-		if ( this.Recursive( "", mot, this.tabSymboleValide, resultat ) )
+		if ( this.trouverRecursivement( "", mot, this.tabSymboleValide, resultat ) )
 		{
 			this.tabSymboleValide = resultat;
 			return true;
@@ -76,22 +71,20 @@ public class PrenomAtomique
 		return false;
 	}
 
-	private boolean Recursive(String construit, String mot, ArrayList<String> symboles, ArrayList<String> resultat)
+	private boolean trouverRecursivement( String construit, String mot, ArrayList<String> listeSymboles, ArrayList<String> resultat )
 	{
-		if ( construit.equals(mot) ) return true;
+		if (   construit.equals( mot  ) )    return true;
+		if ( ! mot.startsWith( construit ) ) return false;
 
-		// Si la chaîne construite ne correspond plus au début du mot, on arrête ici
-		if (!mot.startsWith(construit)) return false;
-
-		// On teste chaque symbole possible
-		for (String s : symboles)
+		for ( String s : listeSymboles )
 		{
 			resultat.add(s);
-			if (Recursive(construit + s, mot, symboles, resultat))
+			if ( trouverRecursivement( construit + s, mot, listeSymboles, resultat ) )
 			{
-				return true; // combinaison trouvée
+				return true;
 			}
-			resultat.remove(resultat.size() - 1); // backtrack
+
+			resultat.remove(resultat.size() - 1);
 		}
 
 		return false;

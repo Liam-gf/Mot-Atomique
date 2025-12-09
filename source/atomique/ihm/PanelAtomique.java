@@ -16,8 +16,8 @@ public class PanelAtomique extends JPanel implements ActionListener
 {
 	private Controleur ctrl;
 	
-	private JTextField txtPrenom;
-	private JLabel     lblPrenom;
+	private JTextField txtMot;
+	private JLabel     lblMot;
 	private JPanel     panelSchema;
 	
 	public PanelAtomique( Controleur ctrl )
@@ -30,21 +30,21 @@ public class PanelAtomique extends JPanel implements ActionListener
 		/* Création des composants       */
 		/* ----------------------------- */
 		
-		JPanel panelPrenom = new JPanel();
+		JPanel panelMot = new JPanel();
 		JPanel panelPhrase = new JPanel();
 		this.panelSchema   = new JPanel();
 		
-		this.txtPrenom     = new JTextField( 30 );
-		this.lblPrenom     = new JLabel    ( "" );
+		this.txtMot     = new JTextField( 30 );
+		this.lblMot     = new JLabel    ( "" );
 		
 		/* ----------------------------- */
 		/* Positionnement des composants */
 		/* ----------------------------- */
 		
-		panelPrenom.add( txtPrenom );
-		panelPhrase.add( lblPrenom );
+		panelMot.add( txtMot );
+		panelPhrase.add( lblMot );
 		
-		this.add(      panelPrenom );
+		this.add(      panelMot );
 		this.add(      panelPhrase );
 		this.add( this.panelSchema );
 		
@@ -52,30 +52,30 @@ public class PanelAtomique extends JPanel implements ActionListener
 		/* Activation des composants      */
 		/* ------------------------------ */
 		
-		this.txtPrenom.addActionListener( this );
+		this.txtMot.addActionListener( this );
 	}
 
 
 	public void actionPerformed( ActionEvent e )
 	{
-		if ( e.getSource() == this.txtPrenom )
+		if ( e.getSource() == this.txtMot )
 		{
-			String mot = this.getPrenom();
+			String mot = this.getMot();
 			
 			this.recupererLettres( mot );
 			this.supprimerOccurence();
 			
 			this.panelSchema.removeAll();
 			
-			if ( this.validerPrenom( mot ) )
+			if ( this.validerMot( mot ) )
 			{
 				this.afficherMot();
 				
-				this.lblPrenom.setText( "Le prénom " + mot + " est atomique !" );
+				this.lblMot.setText( "Le mot " + mot + " est atomique !" );
 			}
 			else
 			{
-				this.lblPrenom.setText( "Le prénom " + mot + " n'est pas atomique !");
+				this.lblMot.setText( "Le mot " + mot + " n'est pas atomique !");
 			}
 			
 			this.panelSchema.revalidate();
@@ -84,9 +84,9 @@ public class PanelAtomique extends JPanel implements ActionListener
 	}
 
 
-	public String getPrenom()
+	public String getMot()
 	{
-		return this.txtPrenom.getText().toLowerCase();
+		return this.txtMot.getText().toLowerCase();
 	}
 
 	public ArrayList<String> getTabValide()
@@ -103,19 +103,22 @@ public class PanelAtomique extends JPanel implements ActionListener
 		
 		for ( String s : tabValide )
 		{
-			JLabel lbl = new JLabel( new ImageIcon(new ImageIcon(this.ctrl.getImage(s)).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
+			ImageIcon imgIcon = this.ctrl.getImage( s );
+
+			Image img = imgIcon.getImage();
+
+			Image imgRedimensionner = img.getScaledInstance( 150, 150, Image.SCALE_SMOOTH );
+
+			JLabel lbl = new JLabel( new ImageIcon( imgRedimensionner ) );
 		
 			this.panelSchema.add(lbl);
 		}
 	}
 
 
-	public void recupererLettres ( String mot ) { this.ctrl.recupererLettres( mot ); }
-	public boolean validerPrenom    ( String mot ) { return this.ctrl.validerPrenom   ( mot ); }
+	public boolean validerMot    ( String mot ) { return this.ctrl.validerMot   ( mot ); }
 
 
-	public void supprimerOccurence()
-	{
-		this.ctrl.supprimerOccurence();
-	}
+	public void recupererLettres  ( String mot ) { this.ctrl.recupererLettres( mot ); }
+	public void supprimerOccurence()             { this.ctrl.supprimerOccurence();    }
 }

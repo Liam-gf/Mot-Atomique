@@ -2,39 +2,41 @@ package atomique;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import atomique.ihm.FrameAtomique;
 
-import atomique.metier.PrenomAtomique;
+import atomique.metier.MotAtomique;
 
 public class Controleur
 {
 	private FrameAtomique  frameAtomique;
-	private PrenomAtomique prenomAtomique;
+	private MotAtomique    motAtomique;
 	
 	public Controleur()
 	{
 		this.frameAtomique  = new FrameAtomique ( this );
-		this.prenomAtomique = new PrenomAtomique();
+		this.motAtomique = new MotAtomique();
 	}
 
 
-	public void    recupererLettres( String prenom ) { this.prenomAtomique.recupererLettres( prenom ); }
-	public boolean validerPrenom   ( String prenom ) { return this.prenomAtomique.validerPrenom   ( prenom ); }
+	public void    recupererLettres( String Mot ) { this.motAtomique.recupererLettres( Mot ); }
+	public boolean validerMot      ( String Mot ) { return this.motAtomique.validerMot   ( Mot ); }
 
 	public void supprimerOccurence()
 	{
-		this.prenomAtomique.supprimerOccurence();
+		this.motAtomique.supprimerOccurrence();
 	}
 
 	public ArrayList<String> getTabValide()
 	{
-		return this.prenomAtomique.getTabValide();
+		return this.motAtomique.getTabValide();
 	}
 
 
-	public String getImage( String s )
+	public ImageIcon getImage( String s )
 	{
-		return "atomique/images/" + s + ".png";
+		return new ImageIcon( "atomique/images/" + s + ".png" );
 	}
 
 
