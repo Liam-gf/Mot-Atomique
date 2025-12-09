@@ -17,8 +17,7 @@ Le programme affiche graphiquement les symboles correspondant à chaque lettre d
 
 1. Ouvrez un terminal dans le dossier du projet.
 2. Rendez le script exécutable :
-
-chmod +x start.sh
+   chmod +x start.sh
 
 3. Executez le script :
 
