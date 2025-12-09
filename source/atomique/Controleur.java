@@ -36,7 +36,7 @@ public class Controleur
 
 	public ImageIcon getImage( String s )
 	{
-		return new ImageIcon( "atomique/images/" + s + ".png" );
+		return new ImageIcon( "source/atomique/images/" + s + ".png" );
 	}
 
 

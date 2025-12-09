@@ -60,7 +60,7 @@ public class PanelAtomique extends JPanel implements ActionListener
 	{
 		if ( e.getSource() == this.txtMot )
 		{
-			String mot = this.getMot();
+			String mot = this.getMot().toLowerCase();
 			
 			this.recupererLettres( mot );
 			this.supprimerOccurence();
@@ -71,11 +71,11 @@ public class PanelAtomique extends JPanel implements ActionListener
 			{
 				this.afficherMot();
 				
-				this.lblMot.setText( "Le mot " + mot + " est atomique !" );
+				this.lblMot.setText( "Le mot " + this.getMot() + " est atomique !" );
 			}
 			else
 			{
-				this.lblMot.setText( "Le mot " + mot + " n'est pas atomique !");
+				this.lblMot.setText( "Le mot " + this.getMot() + " n'est pas atomique !");
 			}
 			
 			this.panelSchema.revalidate();
@@ -86,7 +86,7 @@ public class PanelAtomique extends JPanel implements ActionListener
 
 	public String getMot()
 	{
-		return this.txtMot.getText().toLowerCase();
+		return this.txtMot.getText();
 	}
 
 	public ArrayList<String> getTabValide()

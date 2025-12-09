@@ -1,6 +1,6 @@
-atomique/Controleur.java
+source/atomique/Controleur.java
 
-atomique/ihm/FrameAtomique.java
-atomique/ihm/PanelAtomique.java
+source/atomique/ihm/FrameAtomique.java
+source/atomique/ihm/PanelAtomique.java
 
-atomique/metier/MotAtomique.java
+source/atomique/metier/MotAtomique.java
