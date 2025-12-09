@@ -10,15 +10,11 @@ Le programme affiche graphiquement les symboles correspondant à chaque lettre d
 1. Double-cliquez sur `start.bat`
    **ou**
    Ouvrez PowerShell dans le dossier du projet.
-2. Tapez :
-   start.bat
+2. Tapez : _start.bat_
 
 ### Linux
 
 1. Ouvrez un terminal dans le dossier du projet.
-2. Rendez le script exécutable :
-   chmod +x start.sh
+2. Rendez le script exécutable : _chmod +x start.sh_
 
-3. Executez le script :
-
-./start.sh
+3. Executez le script : _./start.sh_
